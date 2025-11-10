@@ -20,7 +20,7 @@ def setup_libero_config():
     libero_dir = openpi_dir / "third_party" / "libero" / "libero" / "libero"
     
     # Dataset location (where your downloaded datasets are)
-    datasets_dir = workspace_dir / "datasets" / "libero_processed"
+    datasets_dir = workspace_dir / "datasets"
     
     config = {
         "benchmark_root": str(libero_dir),
