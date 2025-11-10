@@ -1,0 +1,291 @@
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/tyro/_parsers.py:347: UserWarning: The field `args.max-trajectories` is annotated with type `<class 'int'>`, but the default value `None` has type `<class 'NoneType'>`. We'll try to handle this gracefully, but it may cause unexpected behavior.
+  warnings.warn(message)
+/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/jax/extend/linear_util.py:38: DeprecationWarning: linear_util.wrap_init is missing a DebugInfo object. This behavior is deprecated, use api_util.debug_info() to construct a proper DebugInfo object and propagate it to this function. See https://github.com/jax-ml/jax/issues/26480 for more details.
+  debug_info = debug_info or _missing_debug_info("linear_util.wrap_init")
+/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/jax/extend/linear_util.py:38: DeprecationWarning: linear_util.wrap_init is missing a DebugInfo object. This behavior is deprecated, use api_util.debug_info() to construct a proper DebugInfo object and propagate it to this function. See https://github.com/jax-ml/jax/issues/26480 for more details.
+  debug_info = debug_info or _missing_debug_info("linear_util.wrap_init")
+/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/flax/core/scope.py:959: DeprecationWarning: shape requires ndarray or scalar arguments, got <class 'jax._src.api.ShapeDtypeStruct'> at position 0. In a future JAX release this will be an error.
+  if jnp.shape(val) != jnp.shape(abs_val):
+Tasks:   0%|          | 0/1 [00:00<?, ?it/s]
+Trajectories:   0%|          | 0/50 [00:00<?, ?it/s][A/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/flax/core/scope.py:959: DeprecationWarning: shape requires ndarray or scalar arguments, got <class 'jax._src.api.ShapeDtypeStruct'> at position 0. In a future JAX release this will be an error.
+  if jnp.shape(val) != jnp.shape(abs_val):
+/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/jax/extend/linear_util.py:38: DeprecationWarning: linear_util.wrap_init is missing a DebugInfo object. This behavior is deprecated, use api_util.debug_info() to construct a proper DebugInfo object and propagate it to this function. See https://github.com/jax-ml/jax/issues/26480 for more details.
+  debug_info = debug_info or _missing_debug_info("linear_util.wrap_init")
+/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/flax/core/scope.py:959: DeprecationWarning: shape requires ndarray or scalar arguments, got <class 'jax._src.api.ShapeDtypeStruct'> at position 0. In a future JAX release this will be an error.
+  if jnp.shape(val) != jnp.shape(abs_val):
+/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/jax/extend/linear_util.py:38: DeprecationWarning: linear_util.wrap_init is missing a DebugInfo object. This behavior is deprecated, use api_util.debug_info() to construct a proper DebugInfo object and propagate it to this function. See https://github.com/jax-ml/jax/issues/26480 for more details.
+  debug_info = debug_info or _missing_debug_info("linear_util.wrap_init")
+/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/flax/core/scope.py:959: DeprecationWarning: shape requires ndarray or scalar arguments, got <class 'jax._src.api.ShapeDtypeStruct'> at position 0. In a future JAX release this will be an error.
+  if jnp.shape(val) != jnp.shape(abs_val):
+/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/flax/core/scope.py:959: DeprecationWarning: shape requires ndarray or scalar arguments, got <class 'jax._src.api.ShapeDtypeStruct'> at position 0. In a future JAX release this will be an error.
+  if jnp.shape(val) != jnp.shape(abs_val):
+/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/flax/core/scope.py:959: DeprecationWarning: shape requires ndarray or scalar arguments, got <class 'jax._src.api.ShapeDtypeStruct'> at position 0. In a future JAX release this will be an error.
+  if jnp.shape(val) != jnp.shape(abs_val):
+/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/flax/core/scope.py:959: DeprecationWarning: shape requires ndarray or scalar arguments, got <class 'jax._src.api.ShapeDtypeStruct'> at position 0. In a future JAX release this will be an error.
+  if jnp.shape(val) != jnp.shape(abs_val):
+/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/jax/extend/linear_util.py:38: DeprecationWarning: linear_util.wrap_init is missing a DebugInfo object. This behavior is deprecated, use api_util.debug_info() to construct a proper DebugInfo object and propagate it to this function. See https://github.com/jax-ml/jax/issues/26480 for more details.
+  debug_info = debug_info or _missing_debug_info("linear_util.wrap_init")
+/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/flax/core/scope.py:959: DeprecationWarning: shape requires ndarray or scalar arguments, got <class 'jax._src.api.ShapeDtypeStruct'> at position 0. In a future JAX release this will be an error.
+  if jnp.shape(val) != jnp.shape(abs_val):
+/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/flax/core/scope.py:959: DeprecationWarning: shape requires ndarray or scalar arguments, got <class 'jax._src.api.ShapeDtypeStruct'> at position 0. In a future JAX release this will be an error.
+  if jnp.shape(val) != jnp.shape(abs_val):
+/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/flax/core/scope.py:959: DeprecationWarning: shape requires ndarray or scalar arguments, got <class 'jax._src.api.ShapeDtypeStruct'> at position 0. In a future JAX release this will be an error.
+  if jnp.shape(val) != jnp.shape(abs_val):
+/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/flax/core/scope.py:959: DeprecationWarning: shape requires ndarray or scalar arguments, got <class 'jax._src.api.ShapeDtypeStruct'> at position 0. In a future JAX release this will be an error.
+  if jnp.shape(val) != jnp.shape(abs_val):
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:   2%|▏         | 1/50 [01:21<1:06:51, 81.87s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:   4%|▍         | 2/50 [01:42<36:46, 45.98s/it]  [A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:   6%|▌         | 3/50 [02:04<27:24, 34.98s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:   8%|▊         | 4/50 [02:25<22:38, 29.53s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  10%|█         | 5/50 [02:46<19:53, 26.51s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  12%|█▏        | 6/50 [03:10<18:35, 25.36s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  14%|█▍        | 7/50 [03:31<17:17, 24.13s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  16%|█▌        | 8/50 [03:52<16:14, 23.21s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  18%|█▊        | 9/50 [04:14<15:26, 22.60s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  20%|██        | 10/50 [04:35<14:50, 22.25s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  22%|██▏       | 11/50 [04:57<14:17, 22.00s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  24%|██▍       | 12/50 [05:18<13:50, 21.85s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  26%|██▌       | 13/50 [05:40<13:25, 21.76s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  28%|██▊       | 14/50 [06:01<13:01, 21.72s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  30%|███       | 15/50 [06:23<12:41, 21.76s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  32%|███▏      | 16/50 [06:45<12:18, 21.72s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  34%|███▍      | 17/50 [07:06<11:55, 21.67s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  36%|███▌      | 18/50 [07:28<11:32, 21.65s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  38%|███▊      | 19/50 [07:50<11:13, 21.72s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  40%|████      | 20/50 [08:13<11:07, 22.24s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  42%|████▏     | 21/50 [08:35<10:43, 22.18s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  44%|████▍     | 22/50 [08:57<10:15, 21.99s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  46%|████▌     | 23/50 [09:19<09:52, 21.94s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  48%|████▊     | 24/50 [09:40<09:25, 21.74s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  50%|█████     | 25/50 [10:01<09:00, 21.63s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  52%|█████▏    | 26/50 [10:23<08:41, 21.73s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  54%|█████▍    | 27/50 [10:44<08:16, 21.57s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  56%|█████▌    | 28/50 [11:06<07:54, 21.57s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  58%|█████▊    | 29/50 [11:27<07:31, 21.50s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  60%|██████    | 30/50 [11:50<07:14, 21.73s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  62%|██████▏   | 31/50 [12:11<06:51, 21.66s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  64%|██████▍   | 32/50 [12:33<06:29, 21.63s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  66%|██████▌   | 33/50 [12:58<06:24, 22.62s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  68%|██████▊   | 34/50 [13:19<05:55, 22.24s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  70%|███████   | 35/50 [13:40<05:30, 22.02s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  72%|███████▏  | 36/50 [14:02<05:05, 21.84s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  74%|███████▍  | 37/50 [14:24<04:43, 21.78s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  76%|███████▌  | 38/50 [14:45<04:20, 21.73s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  78%|███████▊  | 39/50 [15:07<03:59, 21.75s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  80%|████████  | 40/50 [15:29<03:37, 21.77s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  82%|████████▏ | 41/50 [15:51<03:17, 21.90s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  84%|████████▍ | 42/50 [16:12<02:53, 21.70s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  86%|████████▌ | 43/50 [16:34<02:31, 21.69s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  88%|████████▊ | 44/50 [16:55<02:09, 21.56s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  90%|█████████ | 45/50 [17:17<01:47, 21.53s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  92%|█████████▏| 46/50 [17:38<01:26, 21.53s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  94%|█████████▍| 47/50 [18:02<01:06, 22.31s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  96%|█████████▌| 48/50 [18:24<00:44, 22.03s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories:  98%|█████████▊| 49/50 [18:45<00:21, 21.75s/it][A/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+/u/am1125/.local/share/uv/python/cpython-3.11.13-linux-x86_64-gnu/lib/python3.11/subprocess.py:1885: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+
+Trajectories: 100%|██████████| 50/50 [19:06<00:00, 21.67s/it][A
+                                                             [ATasks: 100%|██████████| 1/1 [19:37<00:00, 1177.55s/it]Tasks: 100%|██████████| 1/1 [19:37<00:00, 1177.55s/it]

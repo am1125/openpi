@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/n/fs/vla-distill/openpi/examples/libero/evaluate_trajectories.py", line 18, in <module>
+    import imageio
+ModuleNotFoundError: No module named 'imageio'

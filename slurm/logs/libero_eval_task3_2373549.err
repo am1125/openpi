@@ -1,0 +1,91 @@
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/tyro/_parsers.py:347: UserWarning: The field `args.max-trajectories` is annotated with type `<class 'int'>`, but the default value `None` has type `<class 'NoneType'>`. We'll try to handle this gracefully, but it may cause unexpected behavior.
+  warnings.warn(message)
+/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/jax/extend/linear_util.py:38: DeprecationWarning: linear_util.wrap_init is missing a DebugInfo object. This behavior is deprecated, use api_util.debug_info() to construct a proper DebugInfo object and propagate it to this function. See https://github.com/jax-ml/jax/issues/26480 for more details.
+  debug_info = debug_info or _missing_debug_info("linear_util.wrap_init")
+/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/jax/extend/linear_util.py:38: DeprecationWarning: linear_util.wrap_init is missing a DebugInfo object. This behavior is deprecated, use api_util.debug_info() to construct a proper DebugInfo object and propagate it to this function. See https://github.com/jax-ml/jax/issues/26480 for more details.
+  debug_info = debug_info or _missing_debug_info("linear_util.wrap_init")
+/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/flax/core/scope.py:959: DeprecationWarning: shape requires ndarray or scalar arguments, got <class 'jax._src.api.ShapeDtypeStruct'> at position 0. In a future JAX release this will be an error.
+  if jnp.shape(val) != jnp.shape(abs_val):
+Tasks:   0%|          | 0/1 [00:00<?, ?it/s]
+Trajectories:   0%|          | 0/50 [00:00<?, ?it/s][A/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/flax/core/scope.py:959: DeprecationWarning: shape requires ndarray or scalar arguments, got <class 'jax._src.api.ShapeDtypeStruct'> at position 0. In a future JAX release this will be an error.
+  if jnp.shape(val) != jnp.shape(abs_val):
+/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/jax/extend/linear_util.py:38: DeprecationWarning: linear_util.wrap_init is missing a DebugInfo object. This behavior is deprecated, use api_util.debug_info() to construct a proper DebugInfo object and propagate it to this function. See https://github.com/jax-ml/jax/issues/26480 for more details.
+  debug_info = debug_info or _missing_debug_info("linear_util.wrap_init")
+/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/flax/core/scope.py:959: DeprecationWarning: shape requires ndarray or scalar arguments, got <class 'jax._src.api.ShapeDtypeStruct'> at position 0. In a future JAX release this will be an error.
+  if jnp.shape(val) != jnp.shape(abs_val):
+/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/jax/extend/linear_util.py:38: DeprecationWarning: linear_util.wrap_init is missing a DebugInfo object. This behavior is deprecated, use api_util.debug_info() to construct a proper DebugInfo object and propagate it to this function. See https://github.com/jax-ml/jax/issues/26480 for more details.
+  debug_info = debug_info or _missing_debug_info("linear_util.wrap_init")
+/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/flax/core/scope.py:959: DeprecationWarning: shape requires ndarray or scalar arguments, got <class 'jax._src.api.ShapeDtypeStruct'> at position 0. In a future JAX release this will be an error.
+  if jnp.shape(val) != jnp.shape(abs_val):
+/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/flax/core/scope.py:959: DeprecationWarning: shape requires ndarray or scalar arguments, got <class 'jax._src.api.ShapeDtypeStruct'> at position 0. In a future JAX release this will be an error.
+  if jnp.shape(val) != jnp.shape(abs_val):
+/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/flax/core/scope.py:959: DeprecationWarning: shape requires ndarray or scalar arguments, got <class 'jax._src.api.ShapeDtypeStruct'> at position 0. In a future JAX release this will be an error.
+  if jnp.shape(val) != jnp.shape(abs_val):
+/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/flax/core/scope.py:959: DeprecationWarning: shape requires ndarray or scalar arguments, got <class 'jax._src.api.ShapeDtypeStruct'> at position 0. In a future JAX release this will be an error.
+  if jnp.shape(val) != jnp.shape(abs_val):
+/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/jax/extend/linear_util.py:38: DeprecationWarning: linear_util.wrap_init is missing a DebugInfo object. This behavior is deprecated, use api_util.debug_info() to construct a proper DebugInfo object and propagate it to this function. See https://github.com/jax-ml/jax/issues/26480 for more details.
+  debug_info = debug_info or _missing_debug_info("linear_util.wrap_init")
+/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/flax/core/scope.py:959: DeprecationWarning: shape requires ndarray or scalar arguments, got <class 'jax._src.api.ShapeDtypeStruct'> at position 0. In a future JAX release this will be an error.
+  if jnp.shape(val) != jnp.shape(abs_val):
+/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/flax/core/scope.py:959: DeprecationWarning: shape requires ndarray or scalar arguments, got <class 'jax._src.api.ShapeDtypeStruct'> at position 0. In a future JAX release this will be an error.
+  if jnp.shape(val) != jnp.shape(abs_val):
+/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/flax/core/scope.py:959: DeprecationWarning: shape requires ndarray or scalar arguments, got <class 'jax._src.api.ShapeDtypeStruct'> at position 0. In a future JAX release this will be an error.
+  if jnp.shape(val) != jnp.shape(abs_val):
+/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/flax/core/scope.py:959: DeprecationWarning: shape requires ndarray or scalar arguments, got <class 'jax._src.api.ShapeDtypeStruct'> at position 0. In a future JAX release this will be an error.
+  if jnp.shape(val) != jnp.shape(abs_val):
+
+Trajectories:   2%|▏         | 1/50 [02:57<2:24:52, 177.40s/it][A
+Trajectories:   4%|▍         | 2/50 [05:39<2:14:42, 168.39s/it][A
+Trajectories:   6%|▌         | 3/50 [08:21<2:09:27, 165.26s/it][A
+Trajectories:   8%|▊         | 4/50 [10:48<2:01:15, 158.17s/it][A
+Trajectories:  10%|█         | 5/50 [13:44<2:03:33, 164.75s/it][A
+Trajectories:  12%|█▏        | 6/50 [16:06<1:55:05, 156.94s/it][A
+Trajectories:  14%|█▍        | 7/50 [19:04<1:57:28, 163.91s/it][A
+Trajectories:  16%|█▌        | 8/50 [21:35<1:51:42, 159.57s/it][A
+Trajectories:  18%|█▊        | 9/50 [23:57<1:45:25, 154.28s/it][A
+Trajectories:  20%|██        | 10/50 [26:19<1:40:11, 150.29s/it][A
+Trajectories:  22%|██▏       | 11/50 [28:29<1:33:44, 144.22s/it][A
+Trajectories:  24%|██▍       | 12/50 [31:10<1:34:33, 149.30s/it][A
+Trajectories:  26%|██▌       | 13/50 [33:25<1:29:21, 144.91s/it][A
+Trajectories:  28%|██▊       | 14/50 [35:57<1:28:19, 147.22s/it][A
+Trajectories:  30%|███       | 15/50 [38:12<1:23:38, 143.38s/it][A
+Trajectories:  32%|███▏      | 16/50 [40:56<1:24:51, 149.75s/it][A
+Trajectories:  34%|███▍      | 17/50 [43:16<1:20:46, 146.87s/it][A
+Trajectories:  36%|███▌      | 18/50 [45:38<1:17:31, 145.35s/it][A
+Trajectories:  38%|███▊      | 19/50 [48:35<1:20:02, 154.90s/it][A
+Trajectories:  40%|████      | 20/50 [50:54<1:14:57, 149.91s/it][A
+Trajectories:  42%|████▏     | 21/50 [53:14<1:11:06, 147.11s/it][A
+Trajectories:  44%|████▍     | 22/50 [55:43<1:08:56, 147.73s/it][A
+Trajectories:  46%|████▌     | 23/50 [58:24<1:08:16, 151.71s/it][A
+Trajectories:  48%|████▊     | 24/50 [1:00:51<1:05:00, 150.01s/it][A
+Trajectories:  50%|█████     | 25/50 [1:03:05<1:00:36, 145.46s/it][A
+Trajectories:  52%|█████▏    | 26/50 [1:05:33<58:27, 146.16s/it]  [A
+Trajectories:  54%|█████▍    | 27/50 [1:08:07<56:52, 148.37s/it][A
+Trajectories:  56%|█████▌    | 28/50 [1:10:44<55:20, 150.93s/it][A
+Trajectories:  58%|█████▊    | 29/50 [1:13:45<56:01, 160.06s/it][A
+Trajectories:  60%|██████    | 30/50 [1:15:59<50:45, 152.27s/it][A
+Trajectories:  62%|██████▏   | 31/50 [1:18:10<46:09, 145.78s/it][A
+Trajectories:  64%|██████▍   | 32/50 [1:20:59<45:52, 152.93s/it][A
+Trajectories:  66%|██████▌   | 33/50 [1:23:55<45:16, 159.78s/it][A
+Trajectories:  68%|██████▊   | 34/50 [1:26:33<42:25, 159.08s/it][A
+Trajectories:  70%|███████   | 35/50 [1:28:47<37:57, 151.82s/it][A
+Trajectories:  72%|███████▏  | 36/50 [1:30:57<33:53, 145.26s/it][A
+Trajectories:  74%|███████▍  | 37/50 [1:33:10<30:37, 141.33s/it][A
+Trajectories:  76%|███████▌  | 38/50 [1:35:32<28:21, 141.75s/it][A
+Trajectories:  78%|███████▊  | 39/50 [1:37:51<25:48, 140.73s/it][A
+Trajectories:  80%|████████  | 40/50 [1:40:30<24:22, 146.25s/it][A
+Trajectories:  82%|████████▏ | 41/50 [1:43:05<22:21, 149.06s/it][A
+Trajectories:  84%|████████▍ | 42/50 [1:45:47<20:23, 152.98s/it][A
+Trajectories:  86%|████████▌ | 43/50 [1:49:17<19:48, 169.84s/it][A
+Trajectories:  88%|████████▊ | 44/50 [1:52:14<17:11, 171.99s/it][A
+Trajectories:  90%|█████████ | 45/50 [1:55:10<14:25, 173.15s/it][A
+Trajectories:  92%|█████████▏| 46/50 [1:58:07<11:37, 174.49s/it][A
+Trajectories:  94%|█████████▍| 47/50 [2:01:01<08:42, 174.33s/it][A
+Trajectories:  96%|█████████▌| 48/50 [2:03:59<05:51, 175.52s/it][A
+Trajectories:  98%|█████████▊| 49/50 [2:06:15<02:43, 163.53s/it][A
+Trajectories: 100%|██████████| 50/50 [2:09:13<00:00, 167.90s/it][A
+                                                                [ATasks: 100%|██████████| 1/1 [2:09:39<00:00, 7779.64s/it]Tasks: 100%|██████████| 1/1 [2:09:39<00:00, 7779.64s/it]

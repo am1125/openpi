@@ -1,0 +1,54 @@
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/tyro/_parsers.py:347: UserWarning: The field `args.max-trajectories` is annotated with type `<class 'int'>`, but the default value `None` has type `<class 'NoneType'>`. We'll try to handle this gracefully, but it may cause unexpected behavior.
+  warnings.warn(message)
+2025-11-03 20:22:54.791145: W external/xla/xla/service/platform_util.cc:211] unable to create StreamExecutor for CUDA:0: CUDA error: : CUDA_ERROR_UNKNOWN: unknown error
+Traceback (most recent call last):
+  File "/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/jax/_src/xla_bridge.py", line 915, in backends
+    backend = _init_backend(platform)
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/jax/_src/xla_bridge.py", line 1001, in _init_backend
+    backend = registration.factory()
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/jax/_src/xla_bridge.py", line 693, in factory
+    return xla_client.make_c_api_client(plugin_name, updated_options, None)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/jaxlib/xla_client.py", line 207, in make_c_api_client
+    return _xla.get_c_api_client(plugin_name, options, distributed_client)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jaxlib.xla_extension.XlaRuntimeError: INTERNAL: no supported devices found for platform CUDA
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/n/fs/vla-distill/openpi/examples/libero/evaluate_trajectories.py", line 551, in <module>
+    tyro.cli(main)
+  File "/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/tyro/_cli.py", line 229, in cli
+    return run_with_args_from_cli()
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/n/fs/vla-distill/openpi/examples/libero/evaluate_trajectories.py", line 470, in main
+    policy = load_policy()
+             ^^^^^^^^^^^^^
+  File "/n/fs/vla-distill/openpi/examples/libero/evaluate_trajectories.py", line 59, in load_policy
+    policy = policy_config.create_trained_policy(config, checkpoint_dir)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/n/fs/vla-distill/openpi/src/openpi/policies/policy_config.py", line 57, in create_trained_policy
+    model = train_config.model.load(_model.restore_params(checkpoint_dir / "params", dtype=jnp.bfloat16))
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/n/fs/vla-distill/openpi/src/openpi/models/model.py", line 310, in restore_params
+    mesh = jax.sharding.Mesh(jax.devices(), ("x",))
+                             ^^^^^^^^^^^^^
+  File "/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/jax/_src/xla_bridge.py", line 1115, in devices
+    return get_backend(backend).devices()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/jax/_src/xla_bridge.py", line 1049, in get_backend
+    return _get_backend_uncached(platform)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/jax/_src/xla_bridge.py", line 1028, in _get_backend_uncached
+    bs = backends()
+         ^^^^^^^^^^
+  File "/n/fs/vla-distill/openpi/.venv/lib/python3.11/site-packages/jax/_src/xla_bridge.py", line 931, in backends
+    raise RuntimeError(err_msg)
+RuntimeError: Unable to initialize backend 'cuda': INTERNAL: no supported devices found for platform CUDA (you may need to uninstall the failing plugin package, or set JAX_PLATFORMS=cpu to skip this backend.)

@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/n/fs/vla-distill/openpi/examples/libero/evaluate_trajectories.py", line 19, in <module>
+    from libero.libero import benchmark, get_libero_path
+  File "/n/fs/vla-distill/openpi/third_party/libero/libero/libero/benchmark/__init__.py", line 5, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'

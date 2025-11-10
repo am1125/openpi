@@ -1,0 +1,37 @@
+[robosuite WARNING] No private macro file found! (macros.py:53)
+[robosuite WARNING] It is recommended to use a private macro file (macros.py:54)
+[robosuite WARNING] To setup, run: python /n/fs/vla-distill/openpi/examples/libero/.venv/lib/python3.8/site-packages/robosuite/scripts/setup_macros.py (macros.py:55)
+Traceback (most recent call last):
+  File "examples/libero/evaluate_trajectories.py", line 20, in <module>
+    from libero.libero.envs import OffScreenRenderEnv
+  File "/n/fs/vla-distill/openpi/third_party/libero/libero/libero/envs/__init__.py", line 1, in <module>
+    from .bddl_base_domain import TASK_MAPPING
+  File "/n/fs/vla-distill/openpi/third_party/libero/libero/libero/envs/bddl_base_domain.py", line 3, in <module>
+    import robosuite.utils.transform_utils as T
+  File "/n/fs/vla-distill/openpi/examples/libero/.venv/lib/python3.8/site-packages/robosuite/__init__.py", line 4, in <module>
+    from robosuite.environments.manipulation.lift import Lift
+  File "/n/fs/vla-distill/openpi/examples/libero/.venv/lib/python3.8/site-packages/robosuite/environments/manipulation/lift.py", line 5, in <module>
+    from robosuite.environments.manipulation.single_arm_env import SingleArmEnv
+  File "/n/fs/vla-distill/openpi/examples/libero/.venv/lib/python3.8/site-packages/robosuite/environments/manipulation/single_arm_env.py", line 3, in <module>
+    from robosuite.environments.manipulation.manipulation_env import ManipulationEnv
+  File "/n/fs/vla-distill/openpi/examples/libero/.venv/lib/python3.8/site-packages/robosuite/environments/manipulation/manipulation_env.py", line 3, in <module>
+    from robosuite.environments.robot_env import RobotEnv
+  File "/n/fs/vla-distill/openpi/examples/libero/.venv/lib/python3.8/site-packages/robosuite/environments/robot_env.py", line 7, in <module>
+    from robosuite.controllers import reset_controllers
+  File "/n/fs/vla-distill/openpi/examples/libero/.venv/lib/python3.8/site-packages/robosuite/controllers/__init__.py", line 1, in <module>
+    from .controller_factory import controller_factory, load_controller_config, reset_controllers, get_pybullet_server
+  File "/n/fs/vla-distill/openpi/examples/libero/.venv/lib/python3.8/site-packages/robosuite/controllers/controller_factory.py", line 10, in <module>
+    from .interpolators.linear_interpolator import LinearInterpolator
+  File "/n/fs/vla-distill/openpi/examples/libero/.venv/lib/python3.8/site-packages/robosuite/controllers/interpolators/linear_interpolator.py", line 3, in <module>
+    import robosuite.utils.transform_utils as T
+  File "/n/fs/vla-distill/openpi/examples/libero/.venv/lib/python3.8/site-packages/robosuite/utils/transform_utils.py", line 11, in <module>
+    from robosuite.utils.numba import jit_decorator
+  File "/n/fs/vla-distill/openpi/examples/libero/.venv/lib/python3.8/site-packages/robosuite/utils/numba.py", line 4, in <module>
+    import numba
+  File "/n/fs/vla-distill/openpi/examples/libero/.venv/lib/python3.8/site-packages/numba/__init__.py", line 43, in <module>
+    from numba.np.ufunc import (vectorize, guvectorize, threading_layer,
+  File "/n/fs/vla-distill/openpi/examples/libero/.venv/lib/python3.8/site-packages/numba/np/ufunc/__init__.py", line 3, in <module>
+    from numba.np.ufunc.decorators import Vectorize, GUVectorize, vectorize, guvectorize
+  File "/n/fs/vla-distill/openpi/examples/libero/.venv/lib/python3.8/site-packages/numba/np/ufunc/decorators.py", line 3, in <module>
+    from numba.np.ufunc import _internal
+SystemError: initialization of _internal failed without raising an exception
