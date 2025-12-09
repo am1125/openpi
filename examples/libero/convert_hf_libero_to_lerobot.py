@@ -20,10 +20,15 @@ python openpi/examples/libero/convert_hf_libero_to_lerobot.py --hdf5_path /path/
 To save to a specific local directory:
 python openpi/examples/libero/convert_hf_libero_to_lerobot.py --hdf5_path /path/to/dataset.hdf5 --repo_id your_hf_username/libero --output-dir /path/to/output
 
+To specify state/action dimensions (truncates to first N dimensions):
+python openpi/examples/libero/convert_hf_libero_to_lerobot.py --hdf5_path /path/to/dataset.hdf5 --repo_id your_hf_username/libero --state-dim 8 --action-dim 7
+
 If you want to push your dataset to the Hugging Face Hub:
 python openpi/examples/libero/convert_hf_libero_to_lerobot.py --hdf5_path /path/to/dataset.hdf5 --repo_id your_hf_username/libero --push_to_hub
 
 By default, the dataset is saved to $HF_LEROBOT_HOME, or use --output-dir to specify a custom location.
+By default, the script uses the maximum state/action dimensions found across all HDF5 files.
+Use --state-dim and --action-dim to truncate to specific dimensions.
 """
 
 import json
@@ -53,6 +58,8 @@ def main(
     *,
     output_dir: str | None = None,
     push_to_hub: bool = False,
+    state_dim: int | None = None,
+    action_dim: int | None = None,
 ):
     """
     Convert Libero dataset from local HDF5 format to LeRobot format.
@@ -62,6 +69,8 @@ def main(
         repo_id: The LeRobot repo ID for the output dataset
         output_dir: Local directory path to save the dataset (if None, uses HF_LEROBOT_HOME)
         push_to_hub: Whether to push the converted dataset to HuggingFace Hub
+        state_dim: If specified, truncate states to this dimension (uses first N dimensions)
+        action_dim: If specified, truncate actions to this dimension (uses first N dimensions)
     """
     # Determine output directory
     # Note: LeRobotDataset.create() uses the HF_LEROBOT_HOME environment variable
@@ -119,6 +128,8 @@ def main(
     max_action_dim = 0
     state_shape = None
     action_shape = None
+    state_dims_found = []
+    action_dims_found = []
     
     for hdf5_file in tqdm(hdf5_files, desc="Scanning files"):
         try:
@@ -135,6 +146,7 @@ def main(
                 # Check actions
                 if 'actions' in demo_group:
                     action_dim = demo_group['actions'].shape[1] if len(demo_group['actions'].shape) > 1 else demo_group['actions'].shape[0]
+                    action_dims_found.append((hdf5_file.name, action_dim))
                     if action_dim > max_action_dim:
                         max_action_dim = action_dim
                         action_shape = demo_group['actions'].shape[1:] if len(demo_group['actions'].shape) > 1 else demo_group['actions'].shape
@@ -142,11 +154,15 @@ def main(
                 # Check states
                 if 'states' in demo_group:
                     state_dim = demo_group['states'].shape[1] if len(demo_group['states'].shape) > 1 else demo_group['states'].shape[0]
+                    state_dims_found.append((hdf5_file.name, state_dim))
+                    print(f"  {hdf5_file.name}: states shape = {demo_group['states'].shape}, dimension = {state_dim}")
                     if state_dim > max_state_dim:
                         max_state_dim = state_dim
                         state_shape = demo_group['states'].shape[1:] if len(demo_group['states'].shape) > 1 else demo_group['states'].shape
                 elif 'robot_states' in demo_group:
                     state_dim = demo_group['robot_states'].shape[1] if len(demo_group['robot_states'].shape) > 1 else demo_group['robot_states'].shape[0]
+                    state_dims_found.append((hdf5_file.name, state_dim))
+                    print(f"  {hdf5_file.name}: robot_states shape = {demo_group['robot_states'].shape}, dimension = {state_dim}")
                     if state_dim > max_state_dim:
                         max_state_dim = state_dim
                         state_shape = demo_group['robot_states'].shape[1:] if len(demo_group['robot_states'].shape) > 1 else demo_group['robot_states'].shape
@@ -159,10 +175,36 @@ def main(
     if action_shape is None:
         raise ValueError("Could not find 'actions' in any HDF5 file")
     
+    print(f"\nDetected state dimensions across all files:")
+    for filename, dim in state_dims_found:
+        print(f"  {filename}: {dim} dimensions")
     print(f"\nDetected maximum dimensions:")
     print(f"  State shape: {state_shape} (max dimension: {max_state_dim})")
     print(f"  Action shape: {action_shape} (max dimension: {max_action_dim})")
-    print(f"\nNote: States/actions with smaller dimensions will be padded with zeros.\n")
+    
+    # Override with user-specified dimensions if provided
+    if state_dim is not None:
+        if state_dim > max_state_dim:
+            print(f"\nWarning: Specified state_dim ({state_dim}) is larger than maximum found ({max_state_dim})")
+            print(f"         States will be padded with zeros.")
+        else:
+            print(f"\nUsing user-specified state dimension: {state_dim} (truncating from {max_state_dim})")
+        state_shape = (state_dim,)
+        max_state_dim = state_dim
+    
+    if action_dim is not None:
+        if action_dim > max_action_dim:
+            print(f"\nWarning: Specified action_dim ({action_dim}) is larger than maximum found ({max_action_dim})")
+            print(f"         Actions will be padded with zeros.")
+        else:
+            print(f"\nUsing user-specified action dimension: {action_dim} (truncating from {max_action_dim})")
+        action_shape = (action_dim,)
+        max_action_dim = action_dim
+    
+    print(f"\nFinal dimensions to use:")
+    print(f"  State shape: {state_shape} (dimension: {max_state_dim})")
+    print(f"  Action shape: {action_shape} (dimension: {max_action_dim})")
+    print(f"\nNote: States/actions will be truncated/padded to match these dimensions.\n")
 
     # Double-check and clean up the directory right before create() to ensure it's empty
     # LeRobotDataset.create() may read HF_LEROBOT_HOME at import time, so we need to clean up
@@ -214,6 +256,10 @@ def main(
                 "names": ["actions"],
             },
         },
+        # Reduce parallelism to avoid race conditions in video encoding
+        # This ensures episodes don't get mixed up during async video writing
+        image_writer_threads=1,
+        image_writer_processes=1,
     )
 
     # Convert HDF5 files to LeRobot format
@@ -262,36 +308,20 @@ def main(
                 obs_group = demo_group['obs']
                 
                 # Get images - try common key names
+                # Load images into memory and explicitly copy to avoid any reference issues
                 if 'agentview_rgb' in obs_group:
-                    images = obs_group['agentview_rgb'][:]
+                    images = np.array(obs_group['agentview_rgb'][:], copy=True)
                 elif 'agentview_image' in obs_group:
-                    images = obs_group['agentview_image'][:]
+                    images = np.array(obs_group['agentview_image'][:], copy=True)
                 else:
                     raise ValueError(f"Could not find main camera image in demo {demo_name}. Available keys: {list(obs_group.keys())}")
                 
                 if 'eye_in_hand_rgb' in obs_group:
-                    wrist_images = obs_group['eye_in_hand_rgb'][:]
+                    wrist_images = np.array(obs_group['eye_in_hand_rgb'][:], copy=True)
                 elif 'robot0_eye_in_hand_image' in obs_group:
-                    wrist_images = obs_group['robot0_eye_in_hand_image'][:]
+                    wrist_images = np.array(obs_group['robot0_eye_in_hand_image'][:], copy=True)
                 else:
                     raise ValueError(f"Could not find wrist camera image in demo {demo_name}. Available keys: {list(obs_group.keys())}")
-                
-                # Convert images to uint8 in bulk (much faster than per-frame)
-                # Check dtype first to avoid expensive max() call if already uint8
-                if images.dtype != np.uint8:
-                    # Sample first frame to determine if scaling is needed (faster than checking all frames)
-                    sample_max = float(images[0].max())
-                    if sample_max <= 1.0:
-                        images = (images * 255).astype(np.uint8)
-                    else:
-                        images = images.astype(np.uint8)
-                
-                if wrist_images.dtype != np.uint8:
-                    sample_max = float(wrist_images[0].max())
-                    if sample_max <= 1.0:
-                        wrist_images = (wrist_images * 255).astype(np.uint8)
-                    else:
-                        wrist_images = wrist_images.astype(np.uint8)
                 
                 # Debug: verify we're reading different data (print first demo of each file)
                 file_idx = hdf5_files.index(hdf5_file)
@@ -299,29 +329,32 @@ def main(
                     print(f"  Demo {demo_name}: {len(images)} frames, first_image_mean={images[0].mean():.3f}, last_image_mean={images[-1].mean():.3f}, first_image_hash={hash(images[0].tobytes())}")
                 
                 # Get states and actions
-                # Prefer 'states' over 'robot_states' if both exist
-                if 'states' in demo_group:
+                # Priority: 1) obs/observation_state (8-dim), 2) states (full MuJoCo), 3) robot_states (9-dim)
+                # If observation_state doesn't exist, reconstruct it from raw observations
+                if 'obs' in demo_group and 'observation_state' in obs_group:
+                    # Use pre-computed 8-dim observation state
+                    states = obs_group['observation_state'][:]
+                elif 'states' in demo_group:
+                    # Use full MuJoCo states (will be truncated/padded to expected dim)
                     states = demo_group['states'][:]
                 elif 'robot_states' in demo_group:
+                    # Use robot_states (9-dim: gripper + eef_pos + eef_quat)
                     states = demo_group['robot_states'][:]
+                elif 'obs' in demo_group:
+                    # Try to reconstruct 8-dim observation_state from raw observations
+                    if all(key in obs_group for key in ['ee_pos', 'ee_ori', 'gripper_states']):
+                        print(f"  Reconstructing observation_state from raw observations for {demo_name}")
+                        ee_pos = obs_group['ee_pos'][:]  # (T, 3)
+                        ee_ori = obs_group['ee_ori'][:]  # (T, 3) - already axis-angle
+                        gripper_states = obs_group['gripper_states'][:]  # (T, 2)
+                        # Concatenate to form 8-dim state: [ee_pos(3), ee_ori(3), gripper(2)]
+                        states = np.concatenate([ee_pos, ee_ori, gripper_states], axis=1)  # (T, 8)
+                    else:
+                        raise ValueError(f"Could not find 'observation_state', 'states', 'robot_states', or required obs fields (ee_pos, ee_ori, gripper_states) in demo {demo_name}")
                 else:
-                    raise ValueError(f"Could not find 'states' or 'robot_states' in demo {demo_name}")
+                    raise ValueError(f"Could not find 'states', 'robot_states', or 'obs' group in demo {demo_name}")
                 
                 actions = demo_group['actions'][:]
-                
-                # Convert to float32 in bulk if needed
-                if states.dtype != np.float32:
-                    states = states.astype(np.float32)
-                if actions.dtype != np.float32:
-                    actions = actions.astype(np.float32)
-                
-                # Pre-compute padding needs (only once per episode)
-                expected_state_dim = state_shape[0] if isinstance(state_shape, tuple) else state_shape
-                expected_action_dim = action_shape[0] if isinstance(action_shape, tuple) else action_shape
-                needs_state_padding = len(states[0]) < expected_state_dim
-                needs_action_padding = len(actions[0]) < expected_action_dim
-                needs_state_truncation = len(states[0]) > expected_state_dim
-                needs_action_truncation = len(actions[0]) > expected_action_dim
                 
                 # Verify shapes match
                 num_frames = len(actions)
@@ -334,22 +367,72 @@ def main(
                 
                 # Add each frame to the dataset
                 for frame_idx in range(num_frames):
-                    image = images[frame_idx]
-                    wrist_image = wrist_images[frame_idx]
-                    state = states[frame_idx]
-                    action = actions[frame_idx]
+                    # Explicitly copy images to avoid any reference issues
+                    # Make contiguous copies to ensure video encoder gets independent data
+                    image = np.ascontiguousarray(images[frame_idx].copy())
+                    wrist_image = np.ascontiguousarray(wrist_images[frame_idx].copy())
+                    state = states[frame_idx].copy()
+                    action = actions[frame_idx].copy()
                     
-                    # Handle padding/truncation only if needed (pre-computed above)
-                    if needs_state_padding:
+                    # Ensure images are in the correct format (uint8, RGB)
+                    if image.dtype != np.uint8:
+                        if image.max() <= 1.0:
+                            image = (image * 255).astype(np.uint8)
+                        else:
+                            image = image.astype(np.uint8)
+                    
+                    if wrist_image.dtype != np.uint8:
+                        if wrist_image.max() <= 1.0:
+                            wrist_image = (wrist_image * 255).astype(np.uint8)
+                        else:
+                            wrist_image = wrist_image.astype(np.uint8)
+                    
+                    # Ensure correct shape for images (H, W, C)
+                    if len(image.shape) == 3 and image.shape[2] == 3:
+                        pass  # Already correct
+                    elif len(image.shape) == 4 and image.shape[0] == 1:
+                        image = image[0]
+                    else:
+                        raise ValueError(f"Unexpected image shape: {image.shape}")
+                    
+                    if len(wrist_image.shape) == 3 and wrist_image.shape[2] == 3:
+                        pass  # Already correct
+                    elif len(wrist_image.shape) == 4 and wrist_image.shape[0] == 1:
+                        wrist_image = wrist_image[0]
+                    else:
+                        raise ValueError(f"Unexpected wrist image shape: {wrist_image.shape}")
+                    
+                    # Convert state and action to numpy arrays with correct dtype
+                    state = np.array(state, dtype=np.float32)
+                    action = np.array(action, dtype=np.float32)
+                    
+                    # Ensure state is 1D
+                    if state.ndim > 1:
+                        state = state.flatten()
+                    
+                    # Ensure action is 1D
+                    if action.ndim > 1:
+                        action = action.flatten()
+                    
+                    # Pad or truncate state/action to match expected shape
+                    # (different HDF5 files may have different state dimensions)
+                    expected_state_dim = state_shape[0] if isinstance(state_shape, tuple) else state_shape
+                    expected_action_dim = action_shape[0] if isinstance(action_shape, tuple) else action_shape
+                    
+                    if len(state) < expected_state_dim:
+                        # Pad with zeros
                         padding = np.zeros(expected_state_dim - len(state), dtype=np.float32)
                         state = np.concatenate([state, padding])
-                    elif needs_state_truncation:
+                    elif len(state) > expected_state_dim:
+                        # Truncate to use only first N dimensions
                         state = state[:expected_state_dim]
                     
-                    if needs_action_padding:
+                    if len(action) < expected_action_dim:
+                        # Pad with zeros
                         padding = np.zeros(expected_action_dim - len(action), dtype=np.float32)
                         action = np.concatenate([action, padding])
-                    elif needs_action_truncation:
+                    elif len(action) > expected_action_dim:
+                        # Truncate to use only first N dimensions
                         action = action[:expected_action_dim]
                     
                     # Add frame to dataset with LeRobot format naming
@@ -369,6 +452,10 @@ def main(
                 lerobot_dataset.save_episode()
                 total_episodes += 1
                 total_frames += num_frames
+
+                # Force cleanup to prevent any lingering references
+                del images, wrist_images, states, actions
+                del image, wrist_image, state, action
 
     print(f"Conversion complete! Dataset saved to {output_path}")
     print(f"Total episodes: {total_episodes}")

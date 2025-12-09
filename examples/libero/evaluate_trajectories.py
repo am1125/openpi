@@ -129,6 +129,7 @@ def rollout_from_initial_state(env, policy, initial_state, model_xml, task_descr
     # Store full trajectory data
     trajectory_data = {
         "observations": [],
+        "observation_states": [],  # 8-dimensional state passed to policy
         "actions": [],
         "rewards": [],
         "dones": [],
@@ -168,6 +169,8 @@ def rollout_from_initial_state(env, policy, initial_state, model_xml, task_descr
             "robot0_eef_quat": obs["robot0_eef_quat"],
             "robot0_gripper_qpos": obs["robot0_gripper_qpos"],
         })
+        # Save the 8-dimensional observation state that was passed to the policy
+        trajectory_data["observation_states"].append(obs_dict["observation/state"].copy())
         trajectory_data["actions"].append(action.copy())
         trajectory_data["sim_states"].append(env.sim.get_state())
         
@@ -258,7 +261,8 @@ def fix_model_xml_paths(xml_str):
 def evaluate_task(task, policy, args, max_steps):
     """Evaluate policy on all trajectories for a single task."""
     # Get dataset path
-    dataset_path = pathlib.Path(get_libero_path("datasets")) / "libero" / task.problem_folder / f"{task.name}_demo.hdf5"
+    # dataset_path = pathlib.Path(get_libero_path("datasets")) / "libero" / task.problem_folder / f"{task.name}_demo.hdf5"
+    dataset_path = pathlib.Path(get_libero_path("datasets")) / "libero_processed" / f"{args.task_suite_name}_openvla_processed" / f"{task.name}_demo.hdf5"
     
     if not dataset_path.exists():
         logging.warning(f"Dataset not found: {dataset_path}")
@@ -403,6 +407,10 @@ def evaluate_task(task, policy, args, max_steps):
                     # Joint states (extract from stored sim states)
                     joint_states = np.array([state.qpos[:7] for state in trajectory_data["sim_states"]])
                     obs_group.create_dataset('joint_states', data=joint_states)
+                    
+                    # Save the 8-dimensional observation state that was passed to the policy
+                    observation_states = np.array(trajectory_data["observation_states"])
+                    obs_group.create_dataset('observation_state', data=observation_states)  # 8 dims: [eef_pos(3), eef_ori_axis_angle(3), gripper(2)]
                     
                     # Save main trajectory data (matching LIBERO format exactly)
                     demo_group.create_dataset('actions', data=np.array(trajectory_data["actions"]))

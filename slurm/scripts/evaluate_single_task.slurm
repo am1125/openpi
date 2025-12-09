@@ -43,7 +43,7 @@ echo ""
 # Can override with: sbatch --export=TASK_ID=3 evaluate_single_task.slurm
 TASK_ID=${TASK_ID:-0}  # Default to task 0 if not set
 TASK_SUITE_NAME="libero_spatial"  # Match the parallel script
-OUTPUT_DIR="data/libero/test_evaluation_color/${TASK_SUITE_NAME}"
+OUTPUT_DIR="data/libero/test_evaluation_color_processed/${TASK_SUITE_NAME}"
 
 echo "Task ID: $TASK_ID"
 echo "Task Suite: $TASK_SUITE_NAME"

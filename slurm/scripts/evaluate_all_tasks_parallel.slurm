@@ -24,9 +24,12 @@ echo ""
 cd /n/fs/vla-distill/openpi
 
 # Activate virtual environment
-source .venv/bin/activate
+source .venv_clone_uv/bin/activate
 
 export PYTHONPATH=$PYTHONPATH:$PWD/third_party/libero
+
+export XLA_PYTHON_CLIENT_PREALLOCATE=false
+export XLA_PYTHON_CLIENT_ALLOCATOR=platform
 
 # Verify GPU
 nvidia-smi
@@ -38,7 +41,7 @@ echo ""
 # Run evaluation for this specific task
 # Create task-specific output directory to avoid conflicts
 # Structure: data/libero/task-suite-name/evaluation_task_${SLURM_ARRAY_TASK_ID}
-TASK_SUITE_NAME="libero_10"
+TASK_SUITE_NAME="libero_object"
 OUTPUT_DIR="/n/fs/vla-distill/datasets/rollouts/${TASK_SUITE_NAME}"
 # "data/libero/${TASK_SUITE_NAME}/evaluation_task_${SLURM_ARRAY_TASK_ID}"
 
