@@ -329,30 +329,13 @@ def main(
                     print(f"  Demo {demo_name}: {len(images)} frames, first_image_mean={images[0].mean():.3f}, last_image_mean={images[-1].mean():.3f}, first_image_hash={hash(images[0].tobytes())}")
                 
                 # Get states and actions
-                # Priority: 1) obs/observation_state (8-dim), 2) states (full MuJoCo), 3) robot_states (9-dim)
-                # If observation_state doesn't exist, reconstruct it from raw observations
-                if 'obs' in demo_group and 'observation_state' in obs_group:
-                    # Use pre-computed 8-dim observation state
-                    states = obs_group['observation_state'][:]
-                elif 'states' in demo_group:
-                    # Use full MuJoCo states (will be truncated/padded to expected dim)
+                # Prefer 'states' over 'robot_states' if both exist
+                if 'states' in demo_group:
                     states = demo_group['states'][:]
                 elif 'robot_states' in demo_group:
-                    # Use robot_states (9-dim: gripper + eef_pos + eef_quat)
                     states = demo_group['robot_states'][:]
-                elif 'obs' in demo_group:
-                    # Try to reconstruct 8-dim observation_state from raw observations
-                    if all(key in obs_group for key in ['ee_pos', 'ee_ori', 'gripper_states']):
-                        print(f"  Reconstructing observation_state from raw observations for {demo_name}")
-                        ee_pos = obs_group['ee_pos'][:]  # (T, 3)
-                        ee_ori = obs_group['ee_ori'][:]  # (T, 3) - already axis-angle
-                        gripper_states = obs_group['gripper_states'][:]  # (T, 2)
-                        # Concatenate to form 8-dim state: [ee_pos(3), ee_ori(3), gripper(2)]
-                        states = np.concatenate([ee_pos, ee_ori, gripper_states], axis=1)  # (T, 8)
-                    else:
-                        raise ValueError(f"Could not find 'observation_state', 'states', 'robot_states', or required obs fields (ee_pos, ee_ori, gripper_states) in demo {demo_name}")
                 else:
-                    raise ValueError(f"Could not find 'states', 'robot_states', or 'obs' group in demo {demo_name}")
+                    raise ValueError(f"Could not find 'states' or 'robot_states' in demo {demo_name}")
                 
                 actions = demo_group['actions'][:]
                 
