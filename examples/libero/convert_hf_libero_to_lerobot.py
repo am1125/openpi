@@ -16,15 +16,19 @@ The output follows LeRobot format with nested feature names:
 
 Usage:
 python openpi/examples/libero/convert_hf_libero_to_lerobot.py --hdf5_path /path/to/dataset.hdf5 --repo_id your_hf_username/libero
+python openpi/examples/libero/convert_hf_libero_to_lerobot.py --hdf5_paths /path/to/dataset.hdf5 --repo_id your_hf_username/libero
+
+Multiple inputs (files and/or directories) are supported; all HDF5 files found will be merged into one dataset:
+python openpi/examples/libero/convert_hf_libero_to_lerobot.py --hdf5_paths /data/libero/task1 /data/libero/task2 /data/libero/task3 /data/libero/task4 --repo_id your_hf_username/libero
 
 To save to a specific local directory:
-python openpi/examples/libero/convert_hf_libero_to_lerobot.py --hdf5_path /path/to/dataset.hdf5 --repo_id your_hf_username/libero --output-dir /path/to/output
+python openpi/examples/libero/convert_hf_libero_to_lerobot.py --hdf5_paths /path/to/dataset.hdf5 --repo_id your_hf_username/libero --output-dir /path/to/output
 
 To specify state/action dimensions (truncates to first N dimensions):
-python openpi/examples/libero/convert_hf_libero_to_lerobot.py --hdf5_path /path/to/dataset.hdf5 --repo_id your_hf_username/libero --state-dim 8 --action-dim 7
+python openpi/examples/libero/convert_hf_libero_to_lerobot.py --hdf5_paths /path/to/dataset.hdf5 --repo_id your_hf_username/libero --state-dim 8 --action-dim 7
 
 If you want to push your dataset to the Hugging Face Hub:
-python openpi/examples/libero/convert_hf_libero_to_lerobot.py --hdf5_path /path/to/dataset.hdf5 --repo_id your_hf_username/libero --push_to_hub
+python openpi/examples/libero/convert_hf_libero_to_lerobot.py --hdf5_paths /path/to/dataset.hdf5 --repo_id your_hf_username/libero --push_to_hub
 
 By default, the dataset is saved to $HF_LEROBOT_HOME, or use --output-dir to specify a custom location.
 By default, the script uses the maximum state/action dimensions found across all HDF5 files.
@@ -53,7 +57,8 @@ def get_hf_lerobot_home():
 
 
 def main(
-    hdf5_path: str,
+    hdf5_paths: list[str] | None = None,
+    hdf5_path: str | None = None,
     repo_id: str = "your_hf_username/libero",
     *,
     output_dir: str | None = None,
@@ -65,7 +70,8 @@ def main(
     Convert Libero dataset from local HDF5 format to LeRobot format.
     
     Args:
-        hdf5_path: Path to the HDF5 file or directory containing HDF5 files
+        hdf5_paths: One or more paths to HDF5 files and/or directories containing HDF5 files
+        hdf5_path: Backwards-compatible alias for a single HDF5 file or directory (use hdf5_paths for multiple)
         repo_id: The LeRobot repo ID for the output dataset
         output_dir: Local directory path to save the dataset (if None, uses HF_LEROBOT_HOME)
         push_to_hub: Whether to push the converted dataset to HuggingFace Hub
@@ -105,19 +111,42 @@ def main(
     # (in case environment variable wasn't set properly in a previous run)
     # We need to check this right before create() to ensure we have the correct path
 
-    hdf5_path = Path(hdf5_path)
-    if not hdf5_path.exists():
-        raise FileNotFoundError(f"HDF5 path not found: {hdf5_path}")
-    
-    # Collect all HDF5 files
-    if hdf5_path.is_file() and hdf5_path.suffix in ['.hdf5', '.h5']:
-        hdf5_files = [hdf5_path]
-    elif hdf5_path.is_dir():
-        hdf5_files = list(hdf5_path.glob("*.hdf5")) + list(hdf5_path.glob("*.h5"))
-        if not hdf5_files:
-            raise ValueError(f"No HDF5 files found in directory: {hdf5_path}")
-    else:
-        raise ValueError(f"Invalid HDF5 path: {hdf5_path}")
+    # Normalize inputs: prefer --hdf5_paths if provided, otherwise fall back to --hdf5_path.
+    if hdf5_paths is None:
+        hdf5_paths = []
+    if hdf5_path is not None:
+        # If user passed both, merge them (and de-dupe later)
+        hdf5_paths = [*hdf5_paths, hdf5_path]
+
+    if not hdf5_paths:
+        raise ValueError("No input paths provided. Pass --hdf5_path PATH or --hdf5_paths PATH [PATH ...].")
+
+    input_paths = [Path(p) for p in hdf5_paths]
+    missing = [str(p) for p in input_paths if not p.exists()]
+    if missing:
+        raise FileNotFoundError(f"HDF5 path(s) not found: {missing}")
+
+    # Collect all HDF5 files across all inputs
+    hdf5_files: list[Path] = []
+    invalid_inputs: list[str] = []
+    for p in input_paths:
+        if p.is_file() and p.suffix in [".hdf5", ".h5"]:
+            hdf5_files.append(p)
+        elif p.is_dir():
+            found = list(p.glob("*.hdf5")) + list(p.glob("*.h5"))
+            if not found:
+                print(f"Warning: No HDF5 files found in directory: {p}")
+            hdf5_files.extend(found)
+        else:
+            invalid_inputs.append(str(p))
+
+    if invalid_inputs:
+        raise ValueError(f"Invalid HDF5 input path(s) (must be .hdf5/.h5 file or directory): {invalid_inputs}")
+
+    # De-duplicate and keep a stable order
+    hdf5_files = sorted(set(hdf5_files))
+    if not hdf5_files:
+        raise ValueError("No HDF5 files found across provided input paths.")
     
     print(f"Found {len(hdf5_files)} HDF5 file(s)")
     
@@ -151,27 +180,33 @@ def main(
                         max_action_dim = action_dim
                         action_shape = demo_group['actions'].shape[1:] if len(demo_group['actions'].shape) > 1 else demo_group['actions'].shape
                 
-                # Check states
-                if 'states' in demo_group:
-                    state_dim = demo_group['states'].shape[1] if len(demo_group['states'].shape) > 1 else demo_group['states'].shape[0]
+                # Check states - ONLY use observation_state (8-dim) or reconstruct from raw observations
+                # NEVER use MuJoCo states or robot_states for observation.state
+                obs_group = demo_group.get('obs')
+                if obs_group is not None and 'observation_state' in obs_group:
+                    # Use pre-computed 8-dim observation_state if it exists
+                    state_dim = obs_group['observation_state'].shape[1] if len(obs_group['observation_state'].shape) > 1 else obs_group['observation_state'].shape[0]
                     state_dims_found.append((hdf5_file.name, state_dim))
-                    print(f"  {hdf5_file.name}: states shape = {demo_group['states'].shape}, dimension = {state_dim}")
+                    print(f"  {hdf5_file.name}: observation_state shape = {obs_group['observation_state'].shape}, dimension = {state_dim}")
                     if state_dim > max_state_dim:
                         max_state_dim = state_dim
-                        state_shape = demo_group['states'].shape[1:] if len(demo_group['states'].shape) > 1 else demo_group['states'].shape
-                elif 'robot_states' in demo_group:
-                    state_dim = demo_group['robot_states'].shape[1] if len(demo_group['robot_states'].shape) > 1 else demo_group['robot_states'].shape[0]
+                        state_shape = obs_group['observation_state'].shape[1:] if len(obs_group['observation_state'].shape) > 1 else obs_group['observation_state'].shape
+                elif obs_group is not None and all(key in obs_group for key in ['ee_pos', 'ee_ori', 'gripper_states']):
+                    # Can reconstruct 8-dim state from raw observations
+                    state_dim = 8
                     state_dims_found.append((hdf5_file.name, state_dim))
-                    print(f"  {hdf5_file.name}: robot_states shape = {demo_group['robot_states'].shape}, dimension = {state_dim}")
+                    print(f"  {hdf5_file.name}: will reconstruct observation_state (8 dims) from raw observations")
                     if state_dim > max_state_dim:
                         max_state_dim = state_dim
-                        state_shape = demo_group['robot_states'].shape[1:] if len(demo_group['robot_states'].shape) > 1 else demo_group['robot_states'].shape
+                        state_shape = (8,)
+                # Note: We intentionally skip 'states' (MuJoCo) and 'robot_states' here
+                # to ensure observation.state is always 8-dim reconstructed state
         except Exception as e:
             print(f"Warning: Error scanning {hdf5_file}: {e}")
             continue
     
     if state_shape is None:
-        raise ValueError("Could not find 'states' or 'robot_states' in any HDF5 file")
+        raise ValueError("Could not find 'observation_state' or required obs fields (ee_pos, ee_ori, gripper_states) in any HDF5 file")
     if action_shape is None:
         raise ValueError("Could not find 'actions' in any HDF5 file")
     
@@ -329,13 +364,23 @@ def main(
                     print(f"  Demo {demo_name}: {len(images)} frames, first_image_mean={images[0].mean():.3f}, last_image_mean={images[-1].mean():.3f}, first_image_hash={hash(images[0].tobytes())}")
                 
                 # Get states and actions
-                # Prefer 'states' over 'robot_states' if both exist
-                if 'states' in demo_group:
-                    states = demo_group['states'][:]
-                elif 'robot_states' in demo_group:
-                    states = demo_group['robot_states'][:]
+                # ALWAYS use 8-dim observation_state: either pre-computed or reconstructed from raw observations
+                # NEVER use MuJoCo states or robot_states for observation.state
+                if 'obs' in demo_group and 'observation_state' in obs_group:
+                    # Use pre-computed 8-dim observation state
+                    states = obs_group['observation_state'][:]
+                elif 'obs' in demo_group:
+                    # Reconstruct 8-dim observation_state from raw observations
+                    if all(key in obs_group for key in ['ee_pos', 'ee_ori', 'gripper_states']):
+                        ee_pos = obs_group['ee_pos'][:]  # (T, 3)
+                        ee_ori = obs_group['ee_ori'][:]  # (T, 3) - already axis-angle
+                        gripper_states = obs_group['gripper_states'][:]  # (T, 2)
+                        # Concatenate to form 8-dim state: [ee_pos(3), ee_ori(3), gripper(2)]
+                        states = np.concatenate([ee_pos, ee_ori, gripper_states], axis=1)  # (T, 8)
+                    else:
+                        raise ValueError(f"Could not find 'observation_state' or required obs fields (ee_pos, ee_ori, gripper_states) in demo {demo_name}")
                 else:
-                    raise ValueError(f"Could not find 'states' or 'robot_states' in demo {demo_name}")
+                    raise ValueError(f"Could not find 'obs' group in demo {demo_name}")
                 
                 actions = demo_group['actions'][:]
                 
