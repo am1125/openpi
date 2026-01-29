@@ -292,6 +292,11 @@ uv run torchrun \
     scripts/train_pytorch.py <config_name> --exp_name=<run_name> --save_interval <interval>
 ```
 
+### Distillation with PyTorch
+
+```sh
+uv run torchrun --standalone --nnodes=1 --nproc_per_node=2 scripts/distill_pytorch.py pi0_libero_l06 --exp_name pytorch_distill_test
+```
 ### Precision Settings
 
 JAX and PyTorch implementations handle precision as follows:

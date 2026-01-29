@@ -31,6 +31,7 @@ class Pi0Config(_model.BaseModelConfig):
     pi05: bool = False
     # This config option is not used directly by the model, but it is read by the ModelTransformFactory.
     discrete_state_input: bool = None  # type: ignore
+    gemma_depth: int = 18
 
     def __post_init__(self):
         if self.max_token_len is None:
@@ -106,3 +107,10 @@ class Pi0Config(_model.BaseModelConfig):
         if not filters:
             return nnx.Nothing
         return nnx.All(*filters)
+
+
+@dataclasses.dataclass(frozen=True)
+class DistilledPi0Config(Pi0Config):
+    teacher_config: str = "pi0_libero"
+    loss_weight_gt: float = 1.0
+    loss_weight_teacher: float = 1.0

@@ -55,7 +55,7 @@ class Config:
 Variant = Literal["dummy", "gemma_300m", "gemma_300m_lora", "gemma_2b", "gemma_2b_lora"]
 
 
-def get_config(variant: Variant) -> Config:
+def get_config(variant: Variant, depth=18) -> Config:
     """Returns config for specified gemma variant."""
     if variant == "dummy":
         return Config(
@@ -70,7 +70,7 @@ def get_config(variant: Variant) -> Config:
         # 311M params
         return Config(
             width=1024,
-            depth=18,
+            depth=depth,
             mlp_dim=4096,
             num_heads=8,
             num_kv_heads=1,
@@ -79,7 +79,7 @@ def get_config(variant: Variant) -> Config:
     if variant == "gemma_2b":
         return Config(
             width=2048,
-            depth=18,
+            depth=depth,
             mlp_dim=16_384,
             num_heads=8,
             num_kv_heads=1,
@@ -88,7 +88,7 @@ def get_config(variant: Variant) -> Config:
     if variant == "gemma_2b_lora":
         return Config(
             width=2048,
-            depth=18,
+            depth=depth,
             mlp_dim=16_384,
             num_heads=8,
             num_kv_heads=1,
@@ -99,7 +99,7 @@ def get_config(variant: Variant) -> Config:
         # 311M params
         return Config(
             width=1024,
-            depth=18,
+            depth=depth,
             mlp_dim=4096,
             num_heads=8,
             num_kv_heads=1,
