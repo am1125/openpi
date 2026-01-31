@@ -297,18 +297,70 @@ class LeRobotLiberoDataConfig(DataConfigFactory):
         # For your own dataset, first figure out what keys your environment passes to the policy server
         # and then modify the mappings below so your dataset's keys get matched to those target keys.
         # The repack transform simply remaps key names here.
+        # Repack transform maps dataset keys to the format expected by LiberoInputs.
+        # Supports both nested format (from convert_hf_libero_to_lerobot.py) and flat format
+        # (from convert_libero_data_to_lerobot.py).
+        @dataclasses.dataclass(frozen=True)
+        class FlexibleLiberoRepack(_transforms.DataTransformFn):
+            """Repack transform that supports both nested and flat Libero dataset formats."""
+            
+            def __call__(self, data: dict) -> dict:
+                # Flatten the input data (handles both nested dicts and flat keys with dots)
+                flat_item = _transforms.flatten_dict(data)
+                result = {}
+                
+                # Try nested format first (from convert_hf_libero_to_lerobot.py)
+                # LeRobot stores nested feature names with dots, which flatten_dict converts to '/' format
+                nested_keys = {
+                    "observation/image": ["observation/images/image", "observation.images.image"],
+                    "observation/wrist_image": ["observation/images/image2", "observation.images.image2"],
+                    "observation/state": ["observation/state", "observation.state"],
+                    "actions": ["action"],  # Nested format uses "action" (singular)
+                    "prompt": ["task"],  # Nested format uses "task" key
+                }
+                
+                # Fallback to flat format (from convert_libero_data_to_lerobot.py)
+                flat_keys = {
+                    "observation/image": ["image"],
+                    "observation/wrist_image": ["wrist_image"],
+                    "observation/state": ["state"],
+                    "actions": ["actions"],
+                    "prompt": ["prompt"],
+                }
+                
+                # Try nested format first, fall back to flat format
+                for output_key, nested_key_list in nested_keys.items():
+                    found = False
+                    for key in nested_key_list:
+                        if key in flat_item:
+                            result[output_key] = flat_item[key]
+                            found = True
+                            break
+                    
+                    if not found:
+                        # Try flat format
+                        for key in flat_keys.get(output_key, []):
+                            if key in flat_item:
+                                result[output_key] = flat_item[key]
+                                found = True
+                                break
+                    # If neither exists, skip (will raise error later if required)
+                
+                return _transforms.unflatten_dict(result)
+        
         repack_transform = _transforms.Group(
-            inputs=[
-                _transforms.RepackTransform(
-                    {
-                        "observation/image": "image",
-                        "observation/wrist_image": "wrist_image",
-                        "observation/state": "state",
-                        "actions": "actions",
-                        "prompt": "prompt",
-                    }
-                )
-            ]
+        # inputs=[
+        #         _transforms.RepackTransform(
+        #             {
+        #                 "observation/image": "image",
+        #                 "observation/wrist_image": "wrist_image",
+        #                 "observation/state": "state",
+        #                 "actions": "actions",
+        #                 "prompt": "prompt",
+        #             }
+        #         )
+        #         ]
+            inputs=[FlexibleLiberoRepack()]
         )
 
         # The data transforms are applied to the data coming from the dataset *and* during inference.
