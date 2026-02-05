@@ -293,8 +293,8 @@ def main(
         },
         # Reduce parallelism to avoid race conditions in video encoding
         # This ensures episodes don't get mixed up during async video writing
-        image_writer_threads=1,
-        image_writer_processes=1,
+        image_writer_threads=10,
+        image_writer_processes=5,
     )
 
     # Convert HDF5 files to LeRobot format
