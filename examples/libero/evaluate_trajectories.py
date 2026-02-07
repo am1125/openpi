@@ -43,9 +43,12 @@ class Args:
     num_rollouts_per_trajectory: int = 10
     num_steps_wait: int = 10  # Steps to wait for physics to stabilize
     max_trajectories: int = None  # Limit number of trajectories (None = all, useful for testing)
+    perturb_initial_state: bool = False  # Add light noise to initial state (qpos) before each rollout
+    perturb_sigma_pos: float = 0.02  # Std of Gaussian noise on qpos when perturb_initial_state is True
+    perturb_sigma_vel: float = 0.0  # Std of Gaussian noise on qvel (0 = zero out velocities)
     
     # Output
-    output_dir: str = "data/libero/evaluation"
+    output_dir: str = "datasets/libero_augmented/libero_spatial_test_with_noise"
     save_videos: bool = False  # Set to True to save videos (slow)
     
     seed: int = 7
@@ -104,6 +107,25 @@ def get_observation_dict(obs, task_description, resize_size=224):
     }
     
     return obs_dict
+
+
+def perturb_initial_state(env, model_xml, initial_state, rng, sigma_pos, sigma_vel):
+    """
+    Return a lightly perturbed copy of initial_state (flattened).
+    Uses env to unflatten (qpos/qvel), add noise, then flatten again.
+    """
+    env.reset()
+    env.reset_from_xml_string(model_xml)
+    env.sim.reset()
+    env.sim.set_state_from_flattened(initial_state)
+    env.sim.forward()
+    state = env.sim.get_state()
+    state.qpos[:] = state.qpos + sigma_pos * rng.standard_normal(state.qpos.size)
+    if sigma_vel <= 0:
+        state.qvel[:] = 0
+    else:
+        state.qvel[:] = state.qvel + sigma_vel * rng.standard_normal(state.qvel.size)
+    return state.flatten()
 
 
 def rollout_from_initial_state(env, policy, initial_state, model_xml, task_description, args, max_steps):
@@ -294,6 +316,7 @@ def evaluate_task(task, policy, args, max_steps):
     results = []
     trajectories_dir = pathlib.Path(args.output_dir) / "trajectories"
     trajectories_dir.mkdir(parents=True, exist_ok=True)
+    rng = np.random.default_rng(args.seed)
     
     # Create single HDF5 file for all rollouts of this task (matching LIBERO format)
     task_hdf5_file = trajectories_dir / f"{task.name}_rollouts.hdf5"
@@ -359,8 +382,15 @@ def evaluate_task(task, policy, args, max_steps):
         )):
             for rollout_idx in range(args.num_rollouts_per_trajectory):
                 try:
+                    if args.perturb_initial_state:
+                        state_to_use = perturb_initial_state(
+                            env, model_xml, initial_state, rng,
+                            args.perturb_sigma_pos, args.perturb_sigma_vel
+                        )
+                    else:
+                        state_to_use = initial_state
                     success, num_steps, replay_images, trajectory_data = rollout_from_initial_state(
-                        env, policy, initial_state, model_xml,
+                        env, policy, state_to_use, model_xml,
                         task_description, args, max_steps
                     )
                     
@@ -431,7 +461,7 @@ def evaluate_task(task, policy, args, max_steps):
                     demo_group.create_dataset('robot_states', data=robot_states)
                     
                     # Demo attributes (matching LIBERO format exactly)
-                    demo_group.attrs['init_state'] = initial_state
+                    demo_group.attrs['init_state'] = state_to_use
                     demo_group.attrs['model_file'] = model_xml
                     demo_group.attrs['num_samples'] = len(trajectory_data["observations"])
                     
