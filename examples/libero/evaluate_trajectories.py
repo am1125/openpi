@@ -382,7 +382,7 @@ def evaluate_task(task, policy, args, max_steps):
         )):
             for rollout_idx in range(args.num_rollouts_per_trajectory):
                 try:
-                    if args.perturb_initial_state:
+                    if args.perturb_initial_state and rollout_idx > 0:
                         state_to_use = perturb_initial_state(
                             env, model_xml, initial_state, rng,
                             args.perturb_sigma_pos, args.perturb_sigma_vel
