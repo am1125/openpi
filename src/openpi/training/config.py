@@ -349,20 +349,14 @@ class LeRobotLiberoDataConfig(DataConfigFactory):
                 
                 return _transforms.unflatten_dict(result)
         
-        repack_transform = _transforms.Group(
-        # inputs=[
-        #         _transforms.RepackTransform(
-        #             {
-        #                 "observation/image": "image",
-        #                 "observation/wrist_image": "wrist_image",
-        #                 "observation/state": "state",
-        #                 "actions": "actions",
-        #                 "prompt": "prompt",
-        #             }
-        #         )
-        #         ]
-            inputs=[FlexibleLiberoRepack()]
-        )
+        repack_transform = _transforms.Group(inputs=[_transforms.RepackTransform(
+                     {
+                         "observation/image": "image",
+                         "observation/wrist_image": "wrist_image",
+                         "observation/state": "state",
+                         "actions": "actions",
+                         "prompt": "prompt",
+                     })])
 
         # The data transforms are applied to the data coming from the dataset *and* during inference.
         # Below, we define the transforms for data going into the model (``inputs``) and the transforms
