@@ -519,8 +519,7 @@ class DistilledPI0Pytorch(PI0Pytorch):
 
     def forward(self, observation, actions, teacher: PI0Pytorch, noise=None, time=None) -> Tensor:
         """Do a full training forward pass and compute the loss (batch_size x num_steps x num_motors)"""
-        teacher_observation = {k: (v.clone() if isinstance(v, torch.Tensor) else copy.copy(v)) 
-                           for k, v in observation.items()}
+        teacher_observation = copy.deepcopy(observation)
         
         images, img_masks, lang_tokens, lang_masks, state = self._preprocess_observation(observation, train=True)
 
