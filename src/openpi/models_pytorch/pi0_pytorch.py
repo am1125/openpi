@@ -1,6 +1,6 @@
 import logging
 import math
-
+import copy
 import torch
 from torch import Tensor
 from torch import nn
@@ -519,6 +519,9 @@ class DistilledPI0Pytorch(PI0Pytorch):
 
     def forward(self, observation, actions, teacher: PI0Pytorch, noise=None, time=None) -> Tensor:
         """Do a full training forward pass and compute the loss (batch_size x num_steps x num_motors)"""
+        teacher_observation = {k: (v.clone() if isinstance(v, torch.Tensor) else copy.copy(v)) 
+                           for k, v in observation.items()}
+        
         images, img_masks, lang_tokens, lang_masks, state = self._preprocess_observation(observation, train=True)
 
         if noise is None:
@@ -533,7 +536,7 @@ class DistilledPI0Pytorch(PI0Pytorch):
         u_t = noise - actions
 
         with torch.no_grad():
-            v_t_teacher = teacher.eval_model(observation, actions, noise, time)
+            v_t_teacher = teacher.eval_model(teacher_observation, actions, noise, time)
 
         prefix_embs, prefix_pad_masks, prefix_att_masks = self.embed_prefix(images, img_masks, lang_tokens, lang_masks)
         suffix_embs, suffix_pad_masks, suffix_att_masks, adarms_cond = self.embed_suffix(state, x_t, time)
