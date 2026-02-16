@@ -852,6 +852,9 @@ _CONFIGS = [
         num_workers=8,
         model=pi0_config.DistilledPi0Config(
             teacher_config="pi05_libero",
+            pi05=True,
+            action_horizon=10,
+            action_dim=32,
             gemma_depth=6,
         ),
         data=LeRobotLiberoDataConfig(
@@ -871,6 +874,9 @@ _CONFIGS = [
         num_workers=8,
         model=pi0_config.DistilledPi0Config(
             teacher_config="pi05_libero",
+            pi05=True,
+            action_horizon=10,
+            action_dim=32,
             gemma_depth=9,
         ),
         data=LeRobotLiberoDataConfig(
