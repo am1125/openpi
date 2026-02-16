@@ -866,7 +866,6 @@ _CONFIGS = [
         num_train_steps=30_000,
         batch_size=64,
         save_interval=10_000,
-        pytorch_training_precision="float32",
     ),
     TrainConfig(
         name="pi05_libero_l09",
@@ -888,7 +887,6 @@ _CONFIGS = [
         num_train_steps=30_000,
         batch_size=64,
         save_interval=10_000,
-        pytorch_training_precision="float32",
     ),
     #
     # Fine-tuning Aloha configs.
