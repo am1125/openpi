@@ -790,7 +790,7 @@ _CONFIGS = [
     TrainConfig(
         name="pi0_libero_l06",
         wandb_enabled=False,
-        num_workers=0,
+        num_workers=8,
         model=pi0_config.DistilledPi0Config(
             teacher_config="pi0_libero",
             gemma_depth=6
@@ -809,7 +809,7 @@ _CONFIGS = [
     TrainConfig(
         name="pi0_libero_l09",
         wandb_enabled=False,
-        num_workers=0,
+        num_workers=8,
         model=pi0_config.DistilledPi0Config(
             teacher_config="pi0_libero",
             gemma_depth=9,
@@ -849,7 +849,7 @@ _CONFIGS = [
     TrainConfig(
         name="pi05_libero_l06",
         wandb_enabled=False,
-        num_workers=0,
+        num_workers=8,
         model=pi0_config.DistilledPi0Config(
             teacher_config="pi05_libero",
             gemma_depth=6,
@@ -868,7 +868,7 @@ _CONFIGS = [
     TrainConfig(
         name="pi05_libero_l09",
         wandb_enabled=False,
-        num_workers=0,
+        num_workers=8,
         model=pi0_config.DistilledPi0Config(
             teacher_config="pi05_libero",
             gemma_depth=9,

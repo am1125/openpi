@@ -42,7 +42,7 @@ from pathlib import Path
 
 import h5py
 import numpy as np
-from lerobot.common.datasets.lerobot_dataset import LeRobotDataset
+from lerobot.datasets.lerobot_dataset import LeRobotDataset
 from tqdm import tqdm
 import tyro
 
@@ -51,7 +51,7 @@ def get_hf_lerobot_home():
     """Get HF_LEROBOT_HOME, reading from environment variable if set."""
     # Force re-import to get updated value after env var change
     import importlib
-    import lerobot.common.datasets.lerobot_dataset as lerobot_module
+    import lerobot.datasets.lerobot_dataset as lerobot_module
     importlib.reload(lerobot_module)
     return lerobot_module.HF_LEROBOT_HOME
 

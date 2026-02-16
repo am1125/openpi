@@ -53,10 +53,13 @@ class DataLoader(Protocol[T_co]):
 class TransformedDataset(Dataset[T_co]):
     def __init__(self, dataset: Dataset, transforms: Sequence[_transforms.DataTransformFn]):
         self._dataset = dataset
-        self._transform = _transforms.compose(transforms)
+        self._transforms = list(transforms)
 
     def __getitem__(self, index: SupportsIndex) -> T_co:
-        return self._transform(self._dataset[index])
+        x = self._dataset[index]
+        for t in self._transforms:
+            x = t(x)
+        return x
 
     def __len__(self) -> int:
         return len(self._dataset)
@@ -71,9 +74,14 @@ class IterableTransformedDataset(IterableDataset[T_co]):
         is_batched: bool = False,
     ):
         self._dataset = dataset
-        self._transform = _transforms.compose(transforms)
+        self._transforms = list(transforms)
         self._is_batched = is_batched
 
+    def _apply(self, x):
+        for t in self._transforms:
+            x = t(x)
+        return x
+    
     def __iter__(self):
         for sample in self._dataset:
             if self._is_batched:
@@ -85,12 +93,12 @@ class IterableTransformedDataset(IterableDataset[T_co]):
                 individual_samples = [jax.tree.map(lambda x: x[i], sample) for i in range(batch_size)]  # noqa: B023
 
                 # Transform each sample
-                transformed = [self._transform(s) for s in individual_samples]
+                transformed = [self._apply(s) for s in individual_samples]
 
                 # Recombine batch with tree_map
                 yield jax.tree.map(lambda *x: np.stack(x, axis=0), *transformed)
             else:
-                yield self._transform(sample)
+                yield self._apply(sample)
 
     def __len__(self) -> int:
         return len(self._dataset)
